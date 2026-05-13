@@ -349,6 +349,13 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- ═══════════════════════════════════ PRIORITY BANNER ══ -->
+
+/* ── QUICK NAV ── */
+.quick-nav { position: sticky; top: 0; z-index: 100; background: rgba(250,249,245,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid var(--hairline); padding: 10px 0; margin-bottom: 20px; display: flex; flex-wrap: wrap; gap: 6px; }
+.quick-nav a { font-size: 12px; font-weight: 500; color: var(--body); text-decoration: none; padding: 5px 10px; border: 1px solid var(--hairline); border-radius: 9999px; background: var(--canvas); transition: all .15s; }
+.quick-nav a:hover, .quick-nav a:focus { background: var(--primary); color: #fff; border-color: var(--primary); }
+.quick-nav .nav-label { font-size: 10px; color: var(--muted); letter-spacing: 0.08em; padding: 5px 2px; }
+
 <div class="priority-banner">
   <span>⚡</span>
   <div>
@@ -360,6 +367,18 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
   </div>
 </div>
 
+<div class="quick-nav">
+<span class="nav-label">跳转：</span>
+<a href="#d1">🔥水煮牛肉</a>
+<a href="#d2">🦐油焖虾</a>
+<a href="#d3">🐔桑拿鸡</a>
+<a href="#d4">🥟粉蒸排骨</a>
+<a href="#d5">🍗鸡翅煲</a>
+<a href="#d6">🥬娃娃菜</a>
+<a href="#d7">🥇炸猪排</a>
+<a href="#d8">🎉炸鸡</a>
+</div>
+
 <!-- ═══════════════════════════════════ 自勤 SECTION ══ -->
 <div class="chef-divider">
   <span class="chef-label">👨‍🍳 自勤 · 8道菜</span>
@@ -368,7 +387,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 
 <!-- 自勤 Dishes (8) -->
 <!-- D1: 水煮豆花牛肉 -->
-<div class="dish-card">
+<div class="dish-card" id="d1">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🔥</span>
     <div class="dish-meta">
@@ -450,7 +469,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D2: 油焖大虾 -->
-<div class="dish-card">
+<div class="dish-card" id="d2">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🦐</span>
     <div class="dish-meta">
@@ -513,7 +532,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D3: 桑拿鸡 -->
-<div class="dish-card">
+<div class="dish-card" id="d3">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🐔</span>
     <div class="dish-meta">
@@ -576,7 +595,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D4: 粉蒸排骨 -->
-<div class="dish-card">
+<div class="dish-card" id="d4">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🥟</span>
     <div class="dish-meta">
@@ -641,7 +660,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D5: 奥尔良鸡翅煲 -->
-<div class="dish-card">
+<div class="dish-card" id="d5">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🍗</span>
     <div class="dish-meta">
@@ -701,7 +720,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D6: 娃娃菜炒火腿肠 -->
-<div class="dish-card">
+<div class="dish-card" id="d6">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🥬</span>
     <div class="dish-meta">
@@ -760,7 +779,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D7: 厚切炸猪排 -->
-<div class="dish-card">
+<div class="dish-card" id="d7">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🥇</span>
     <div class="dish-meta">
@@ -819,7 +838,7 @@ h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line
 </div>
 
 <!-- D8: 派对炸鸡组合 -->
-<div class="dish-card">
+<div class="dish-card" id="d8">
   <div class="dish-card-header ziqin">
     <span class="dish-emoji">🎉</span>
     <div class="dish-meta">
