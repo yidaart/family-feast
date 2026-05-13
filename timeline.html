@@ -4,31 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>家宴时间轴 · 5月16日</title>
+<link rel="stylesheet" href="style.css">
 <style>
-:root {
-  --canvas: #faf9f5; --ink: #141413; --body: #3d3d3a; --muted: #8a8a87;
-  --primary: #cc785c; --surface-card: #efe9de; --hairline: #e0d9cf;
-  --shadow: rgba(20,20,18,0.06); --accent-amber: #fdf3e3; --warning: #8a4a2a;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:var(--canvas);color:var(--body);padding:32px 16px 64px;line-height:1.6}
-.container{max-width:800px;margin:0 auto}
-h1{font-family:Georgia,serif;font-size:clamp(32px,5vw,48px);color:var(--ink);letter-spacing:-1px}
+.container{max-width:800px}
 h2{font-family:Georgia,serif;font-size:20px;color:var(--ink);margin:32px 0 12px}
-.sub{color:var(--muted);font-size:14px;margin-bottom:24px}
-.nav{display:flex;gap:12px;margin-bottom:24px}
-.nav a{color:var(--primary);text-decoration:none;font-size:13px;font-weight:500;padding:6px 14px;border:1px solid var(--hairline);border-radius:9999px}
-.nav a:hover{background:var(--surface-card)}
 .card{background:var(--surface-card);border:1px solid var(--hairline);border-radius:14px;padding:20px 24px;margin-bottom:14px;box-shadow:0 1px 3px var(--shadow);position:relative}
 .card.eve{background:#f0ede8;border-left:4px solid var(--muted)}
 .card.phase{background:var(--canvas)}
-.time{font-size:11px;color:var(--primary);font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
+.time{font-size:12px;color:var(--primary);font-weight:600;letter-spacing:0.08em;text-transform:uppercase}
 .title{font-size:17px;font-weight:600;color:var(--ink);margin:4px 0}
-.detail{font-size:13px;color:var(--body);line-height:1.7}
-.warn{background:#fdf5f0;border:1px solid #f0d8c8;border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:13px;color:var(--warning)}
-.warn strong{color:var(--ink)}
-.gap-line{text-align:center;color:var(--muted);font-size:11px;padding:8px 0;letter-spacing:0.1em}
-@media(max-width:600px){body{padding:16px 8px 48px}.card{padding:14px 16px}}
+.detail{font-size:14px;color:var(--body);line-height:1.7}
+.gap-line{text-align:center;color:var(--muted);font-size:12px;padding:8px 0;letter-spacing:0.1em}
 </style>
 </head>
 <body>
@@ -42,64 +28,32 @@ h2{font-family:Georgia,serif;font-size:20px;color:var(--ink);margin:32px 0 12px}
 <h1>家宴时间轴</h1>
 <div class="sub">2026年5月16日 · 自勤8道菜 · 20人份 · 12:00上桌</div>
 
-<div class="warn">
-  <strong>关键路径：</strong>粉蒸排骨 ← 提前一天准备。高压锅25-30min是全局最长的单步。
-</div>
+<div class="warn"><strong>关键路径：</strong>粉蒸排骨 ← 提前一天准备。高压锅25-30min是全局最长的单步。</div>
 
 <h2>前一晚 · 5月15日</h2>
-<div class="card eve">
-  <div class="time">20:00</div><div class="detail">排骨冷水泡血水 1h，中途换水1-2次</div>
-</div>
-<div class="card eve">
-  <div class="time">21:00</div><div class="detail">排骨沥干 → 腌料拌匀 → 冰箱腌制过夜<br>干辣椒攥碎干锅炒香，花椒炒干磨面，密封<br>葱段+姜丝泡水（葱姜水），冰箱过夜</div>
-</div>
-<div class="card eve">
-  <div class="time">21:30</div><div class="detail">娃娃菜、卷心菜洗净沥干，冰箱保存<br>虫草花温水泡软沥干，冰箱保存</div>
-</div>
+<div class="card eve"><div class="time">20:00</div><div class="detail">排骨冷水泡血水 1h，中途换水1-2次</div></div>
+<div class="card eve"><div class="time">21:00</div><div class="detail">排骨沥干 → 腌料拌匀 → 冰箱腌制过夜<br>干辣椒攥碎干锅炒香，花椒炒干磨面，密封<br>葱段+姜丝泡水（葱姜水），冰箱过夜</div></div>
+<div class="card eve"><div class="time">21:30</div><div class="detail">娃娃菜、卷心菜洗净沥干，冰箱保存<br>虫草花温水泡软沥干，冰箱保存</div></div>
 
 <h2>当天 · 5月16日</h2>
 
 <h2>09:00 · 启动</h2>
-<div class="card">
-  <div class="time">09:00</div><div class="title">排骨回温+裹粉+入锅</div>
-  <div class="detail">从冰箱取出→回温→裹蒸肉粉→摆盘。9:15入高压锅，上汽后中火压25-30min。这是全局关键路径，不能晚。</div>
-</div>
-<div class="card">
-  <div class="time">09:45</div><div class="detail">鸡切丝，腌料拌匀腌15min（桑拿鸡）<br>罗氏虾处理：剪须脚刺、开背去虾线（油焖虾）<br>娃娃菜+卷心菜切好，火腿肠切斜片</div>
-</div>
+<div class="card"><div class="time">09:00</div><div class="title">排骨回温+裹粉+入锅</div><div class="detail">从冰箱取出→回温→裹蒸肉粉→摆盘。9:15入高压锅，上汽后中火压25-30min。这是全局关键路径，不能晚。</div></div>
+<div class="card"><div class="time">09:45</div><div class="detail">鸡切丝，腌料拌匀腌15min（桑拿鸡）<br>罗氏虾处理：剪须脚刺、开背去虾线（油焖虾）<br>娃娃菜+卷心菜切好，火腿肠切斜片</div></div>
 
 <h2>10:00 · 并行</h2>
-<div class="card">
-  <div class="time">10:00</div><div class="detail">高压锅散气，排骨出锅保温<br>丝瓜切滚刀块，虫草花铺盘 → 桑拿鸡上蒸锅 10-12min</div>
-</div>
-<div class="card">
-  <div class="time">10:15</div><div class="detail">牛肉顶丝切1mm薄片 → 腌肉（盐+味精+老抽+碱+葱姜水+全蛋+淀粉+封油）<br>蔬菜焯水：豆芽/金针菇/莴笋（水煮牛肉配菜）</div>
-</div>
+<div class="card"><div class="time">10:00</div><div class="detail">高压锅散气，排骨出锅保温<br>丝瓜切滚刀块，虫草花铺盘 → 桑拿鸡上蒸锅 10-12min</div></div>
+<div class="card"><div class="time">10:15</div><div class="detail">牛肉顶丝切1mm薄片 → 腌肉（盐+味精+老抽+碱+葱姜水+全蛋+淀粉+封油）<br>蔬菜焯水：豆芽/金针菇/莴笋（水煮牛肉配菜）</div></div>
 
 <h2>10:30 · 半成品</h2>
-<div class="card">
-  <div class="time">10:30</div><div class="detail">猪排回温，卷心菜切丝铺盘<br>鸡翅划刀+清水泡血水，腌料调好腌10min</div>
-</div>
-<div class="card">
-  <div class="time">10:40</div><div class="detail">空气炸锅预热180°C 5min → 猪排裹粉（面粉→蛋液→面包糠）→ 炸10-12min（中途翻面）</div>
-</div>
+<div class="card"><div class="time">10:30</div><div class="detail">猪排回温，卷心菜切丝铺盘<br>鸡翅划刀+清水泡血水，腌料调好腌10min</div></div>
+<div class="card"><div class="time">10:40</div><div class="detail">空气炸锅预热180°C 5min → 猪排裹粉（面粉→蛋液→面包糠）→ 炸10-12min（中途翻面）</div></div>
 
 <h2>11:00 · 冲刺</h2>
-<div class="card">
-  <div class="time">11:05</div><div class="title">油焖罗氏虾</div>
-  <div class="detail">炒锅：宽油大火炒虾至壳变红→盛出→锅留底油→姜蒜爆香→晓飞歌调料炒出红油→下虾→加啤酒200ml→小火焖3-5min→撒葱花。全程约12-15min。</div>
-</div>
-<div class="card">
-  <div class="time">11:20</div><div class="title">水煮豆花牛肉</div>
-  <div class="detail">炒锅：底油炸花椒→捞出→小火炒豆瓣酱出红油→加葱姜蒜+辣椒碎→加水+调料煮开→烫菜铺底→大火下牛肉片→再次大开约1min→捞出→撒花椒面+辣椒碎+葱蒜→热油六七成热泼上。全程约20min。</div>
-</div>
-<div class="card">
-  <div class="time">11:40</div><div class="detail">炒锅：炸鸡分批油炸 5-6min → 控油 → 大托盘摆盘配三种酱<br>砂锅微温入料 → 鸡翅煲小火焖 3-5min</div>
-</div>
-<div class="card">
-  <div class="time">11:50</div><div class="title">娃娃菜炒火腿肠</div>
-  <div class="detail">炒锅：大火！油温七成→蒜姜末+辣椒爆香→火腿肠煎微焦→下娃娃菜猛火快炒不到2min→调味→出锅。不盖盖。</div>
-</div>
+<div class="card"><div class="time">11:05</div><div class="title">油焖罗氏虾</div><div class="detail">炒锅：宽油大火炒虾至壳变红→盛出→锅留底油→姜蒜爆香→晓飞歌调料炒出红油→下虾→加啤酒200ml→小火焖3-5min→撒葱花。全程约12-15min。</div></div>
+<div class="card"><div class="time">11:20</div><div class="title">水煮豆花牛肉</div><div class="detail">炒锅：底油炸花椒→捞出→小火炒豆瓣酱出红油→加葱姜蒜+辣椒碎→加水+调料煮开→烫菜铺底→大火下牛肉片→再次大开约1min→捞出→撒花椒面+辣椒碎+葱蒜→热油六七成热泼上。全程约20min。</div></div>
+<div class="card"><div class="time">11:40</div><div class="detail">炒锅：炸鸡分批油炸 5-6min → 控油 → 大托盘摆盘配三种酱<br>砂锅微温入料 → 鸡翅煲小火焖 3-5min</div></div>
+<div class="card"><div class="time">11:50</div><div class="title">娃娃菜炒火腿肠</div><div class="detail">炒锅：大火！油温七成→蒜姜末+辣椒爆香→火腿肠煎微焦→下娃娃菜猛火快炒不到2min→调味→出锅。不盖盖。</div></div>
 
 <div class="gap-line">━━ 12:00 · 全部上桌 ━━</div>
 
