@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>新居入伙 · 家宴如意</title>
+<style>
+/***** STYLE: Claude Warm Tone (Style C) — Design System v1.0 *****/
+
+/* ── Color System ── */
+:root {
+  --canvas:         #faf9f5;
+  --surface-soft:   #f5f0e8;
+  --surface-card:    #efe9de;
+  --surface-dark:    #181715;
+  --ink:            #141413;
+  --body:           #3d3d3a;
+  --body-light:     #6b6b68;
+  --muted:          #8a8a87;
+  --primary:        #cc785c;
+  --primary-dark:    #a9583e;
+  --accent-teal:    #5db8a6;
+  --accent-amber:   #e8a55a;
+  --accent-amber-light: #fdf3e3;
+  --success:        #5db872;
+  --warning:        #d4a017;
+  --error:          #c64545;
+  --hairline:       #e0d9cf;
+  --shadow:         rgba(20,20,18,0.06);
+  --shadow-md:      rgba(20,20,18,0.10);
+}
+
+/* ── Reset & Base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-font-smoothing: antialiased; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  line-height: 1.6;
+  padding: 32px 16px 64px;
+}
+
+/* ── Typography ── */
+h1, h2, h3 { font-family: Georgia, "PingFang SC", serif; color: var(--ink); line-height: 1.2; }
+.eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.display-xl  { font-size: clamp(40px, 6vw, 64px); font-weight: 600; letter-spacing: -2px; line-height: 1.05; }
+.display-lg  { font-size: clamp(28px, 4vw, 40px); font-weight: 600; letter-spacing: -1px; line-height: 1.1; }
+.headline   { font-size: 20px; font-weight: 600; letter-spacing: -0.3px; }
+.body-text  { font-size: 14px; line-height: 1.65; }
+.caption    { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+/* ── Layout ── */
+.container { max-width: 1100px; margin: 0 auto; }
+
+/* ── HEADER ── */
+.header {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 16px;
+  padding: 40px 48px;
+  margin-bottom: 20px;
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(204,120,92,0.25) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-inner { position: relative; z-index: 1; }
+.header-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--primary); margin-bottom: 8px; }
+.header h1 { color: #fff; font-size: clamp(32px, 5vw, 52px); letter-spacing: -1.5px; }
+.header-sub { color: rgba(255,255,255,0.55); font-size: 14px; margin-top: 8px; }
+.header-meta { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 12px; }
+.header-badge {
+  background: rgba(204,120,92,0.18);
+  border: 1px solid rgba(204,120,92,0.4);
+  color: var(--primary);
+  font-size: 12px; font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+/* ── SUMMARY STRIP ── */
+.summary-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background: var(--surface-card);
+  border-radius: 16px;
+  border: 1px solid var(--hairline);
+  overflow: hidden;
+  margin-bottom: 20px;
+  box-shadow: 0 1px 3px var(--shadow), 0 1px 2px var(--shadow);
+}
+.summary-item {
+  padding: 20px 24px;
+  border-right: 1px solid var(--hairline);
+  position: relative;
+}
+.summary-item:last-child { border-right: none; }
+.summary-item .num {
+  font-family: Georgia, serif;
+  font-size: 26px; font-weight: 600;
+  color: var(--ink); letter-spacing: -0.5px;
+  line-height: 1;
+}
+.summary-item .label { font-size: 11px; color: var(--muted); margin-top: 4px; letter-spacing: 0.05em; }
+.summary-item .sub { font-size: 10px; color: var(--body-light); margin-top: 2px; }
+.summary-item.highlight { background: var(--accent-amber-light); }
+
+/* ── PRIORITY BANNER ── */
+.priority-banner {
+  background: linear-gradient(135deg, #fdf9f0 0%, #faf5ec 100%);
+  border: 1px solid #f0d9a0;
+  border-radius: 12px;
+  padding: 14px 20px;
+  font-size: 13px;
+  color: #7a5c1a;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.priority-banner::before { content: '⚡'; font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.priority-banner strong { color: var(--ink); }
+
+/* ── CHEF SECTION DIVIDER ── */
+.chef-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 28px 0 16px;
+}
+.chef-divider .chef-label {
+  background: var(--ink);
+  color: #fff;
+  font-size: 13px; font-weight: 600;
+  padding: 6px 18px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  letter-spacing: 0.03em;
+}
+.chef-divider .chef-label.yang {
+  background: var(--accent-teal);
+}
+.chef-divider .line { flex: 1; height: 1px; background: var(--hairline); }
+
+/* ── DISH CARD ── */
+.dish-card {
+  background: var(--surface-card);
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  box-shadow: 0 1px 3px var(--shadow), 0 1px 2px var(--shadow);
+  transition: box-shadow 0.2s ease;
+}
+.dish-card:hover {
+  box-shadow: 0 4px 12px var(--shadow-md), 0 2px 4px var(--shadow);
+}
+.dish-card-header {
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--hairline);
+  position: relative;
+}
+.dish-card-header::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--primary);
+  border-radius: 0 2px 2px 0;
+}
+.dish-card-header.ziqin::before { background: var(--primary); }
+.dish-card-header.yang::before { background: var(--accent-teal); }
+
+.dish-emoji { font-size: 22px; flex-shrink: 0; }
+.dish-meta { flex: 1; }
+.dish-name { font-family: Georgia, serif; font-size: 17px; font-weight: 600; color: var(--ink); letter-spacing: -0.2px; }
+.dish-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.dish-src-tag {
+  font-size: 11px; color: var(--body-light);
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  padding: 2px 8px; border-radius: 9999px;
+}
+
+/* ── DISH BODY (3-column grid) ── */
+.dish-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--hairline);
+}
+.col-header {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted);
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid var(--hairline);
+  background: var(--surface-soft);
+}
+.col-content { padding: 12px 16px; }
+.col-content ul { list-style: none; }
+.col-content li { font-size: 12.5px; line-height: 1.7; color: var(--body); margin-bottom: 4px; }
+.col-content li strong { color: var(--ink); font-weight: 500; }
+.col-border { border-right: 1px solid var(--hairline); }
+.col-border:last-child { border-right: none; }
+
+/* ── DISH FOOTER (steps) ── */
+.dish-steps {
+  padding: 12px 20px 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+.dish-steps ol {
+  padding-left: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px 16px;
+}
+.dish-steps li { font-size: 12px; line-height: 1.65; color: var(--body); margin-bottom: 3px; }
+.dish-steps li::marker { color: var(--primary); font-weight: 600; }
+
+/* ── NOTE / HINT ── */
+.dish-note {
+  padding: 10px 16px;
+  font-size: 11.5px;
+  color: var(--body-light);
+  background: var(--surface-soft);
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.dish-note.warning {
+  background: #fdf5f0;
+  border-top: 1px solid #f0d8c8;
+  color: #8a4a2a;
+}
+.dish-note.info {
+  background: #f0f7f5;
+  border-top: 1px solid #c8e8e0;
+  color: #2a6b5c;
+}
+.note-icon { flex-shrink: 0; font-size: 14px; }
+
+/* ── TIMELINE ── */
+.dish-timeline {
+  padding: 9px 16px;
+  font-size: 11.5px;
+  color: var(--body-light);
+  background: var(--canvas);
+  border-top: 1px solid var(--hairline);
+  line-height: 1.6;
+}
+.dish-timeline strong { color: var(--ink); }
+.dish-timeline .tag-src {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  padding: 1px 6px; border-radius: 9999px;
+}
+
+/* ── PLACEHOLDER CARD (小杨 pending) ── */
+.dish-card.placeholder { opacity: 0.8; }
+.dish-card.placeholder .dish-card-header::before { background: var(--accent-teal); }
+
+/* ── FOOTER ── */
+.footer {
+  text-align: center;
+  padding: 32px 16px;
+  font-size: 12px;
+  color: var(--muted);
+  border-top: 1px solid var(--hairline);
+  margin-top: 32px;
+}
+.footer-sep { display: flex; align-items: center; gap: 16px; margin-bottom: 12px; }
+.footer-sep .line { flex: 1; height: 1px; background: var(--hairline); }
+.footer-sep .text { font-family: Georgia, serif; font-size: 14px; color: var(--body-light); }
+
+/* ── PRINT ── */
+@media print {
+  body { background: white; padding: 0; }
+  .dish-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+  .header { background: var(--ink) !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .summary-strip { break-inside: avoid; }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .summary-strip { grid-template-columns: repeat(2, 1fr); }
+  .dish-body { grid-template-columns: 1fr; }
+  .col-border { border-right: none; border-bottom: 1px solid var(--hairline); }
+  .dish-steps ol { grid-template-columns: 1fr; }
+  .header { padding: 28px 24px; }
+}
+@media (max-width: 480px) {
+  body { padding: 12px 8px 48px; }
+  .summary-strip { grid-template-columns: repeat(2, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ═══════════════════════════════════════════ HEADER ══ -->
+<div class="header">
+  <div class="header-inner">
+    <div class="header-eyebrow">新居入伙 · 2026年5月16日</div>
+    <h1>家宴如意</h1>
+    <div class="header-sub">两厨掌勺 · 十六道菜 · 二十人共享</div>
+    <div class="header-meta">
+      <span class="header-badge">🔥 自勤 8道</span>
+      <span class="header-badge">共8道菜</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ SUMMARY STRIP ══ -->
+<div class="summary-strip">
+  <div class="summary-item">
+    <div class="num">8</div>
+    <div class="label">道菜</div>
+    <div class="sub">自勤负责·硬菜+配菜</div>
+  </div>
+  <div class="summary-item">
+    <div class="num">20</div>
+    <div class="label">人份</div>
+    <div class="sub">宴会场景 · 多人共享</div>
+  </div>
+  <div class="summary-item">
+    <div class="num">~3h</div>
+    <div class="label">总烹饪</div>
+    <div class="sub">粉蒸排骨最长60min</div>
+  </div>
+  <div class="summary-item highlight">
+    <div class="num" style="color:#8a4a00">先蒸</div>
+    <div class="label">粉蒸排骨</div>
+    <div class="sub">→ 排骨先上锅蒸60min</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ PRIORITY BANNER ══ -->
+<div class="priority-banner">
+  <span>⚡</span>
+  <div>
+    <strong>排菜优先级：</strong>
+    ① <strong>粉蒸排骨</strong>最先入高压锅（压30-35min）→
+    ② <strong>桑拿鸡</strong>蒸锅蒸（~12min，与排骨可同时进行）→
+    ③ 其他菜并行操作→
+    ④ <strong>奥尔良鸡翅煲</strong>最后，上桌前15min开始。
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════ 自勤 SECTION ══ -->
+<div class="chef-divider">
+  <span class="chef-label">👨‍🍳 自勤 · 8道菜</span>
+  <span class="line"></span>
+</div>
+
+<!-- 自勤 Dishes (8) -->
+<!-- D1: 水煮豆花牛肉 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🔥</span>
+    <div class="dish-meta">
+      <div class="dish-name">红红火火 · 水煮豆花牛肉</div>
+      <div class="dish-sub">硬菜 · 隋卞做法 · 用户自制加豆花</div>
+    </div>
+    <span class="dish-src-tag">特厨隋卞 BV1pC411Y7ch</span>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>牛外脊</strong> — 2kg，顶丝切约1mm薄片</li>
+          <li><strong>豆花（嫩豆腐）</strong> — 8小块（约1.5kg），划大块</li>
+          <li><strong>莴笋</strong> — 2根，切薄片</li>
+          <li><strong>豆芽</strong> — 500g，焯水备用</li>
+          <li><strong>金针菇</strong> — 300g，去根洗净</li>
+          <li><strong>芹菜</strong> — 150g，切段</li>
+          <li><strong>干辣椒</strong> — 80g，攥碎，干锅炒香</li>
+          <li><strong>花椒</strong> — 60g，干锅炒干磨面</li>
+          <li><strong>小葱·蒜·姜</strong> — 各适量</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配关键</div>
+      <div class="col-content">
+        <ul>
+          <li>牛肉<strong>顶丝（逆纹）切1mm</strong>；可用刀背先砸断纹路再切</li>
+          <li>冻肉版：冻至半硬切1.5mm，化冻后沥干揪白筋</li>
+          <li>干辣椒攥碎干锅小火炒香；花椒炒干后磨粗粉</li>
+          <li><strong>葱姜水</strong>：葱段+姜丝泡水，<em>一斤肉配二两多</em></li>
+        </ul>
+        <div style="margin-top:10px">
+          <div class="col-header" style="padding:6px 0 6px;border:none;background:transparent">🥫 调料</div>
+          <ul>
+            <li><strong>腌肉：</strong>盐·味精·老抽·食用碱（极少许）·全蛋·稀释水淀粉</li>
+            <li><strong>汤底：</strong>豆瓣酱·辣椒碎·葱姜蒜（留部分）·花椒油底</li>
+            <li><strong>调味：</strong>花椒面·生抽·胡椒粉·味精·糖</li>
+            <li><strong>泼油：</strong>花椒面·辣椒碎·葱花·蒜末·白芝麻，热油六七成热</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪（隋卞做法）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 腌肉：</strong>盐+味精+老抽+食用碱按摩至粘稠 → 加葱姜水（一斤肉二两多）→ 加全蛋抓匀 → 稀释淀粉挂浆 → 补老抽调色 → 表面封油</li>
+          <li><strong>② 炒香料油：</strong>底油炸花椒后捞出（只用油）</li>
+          <li><strong>③ 炒底料：</strong>小火炒豆瓣酱出红油 → 加葱姜蒜+辣椒碎</li>
+          <li><strong>④ 煮汤：</strong>加水+花椒面+生抽+胡椒粉+味精+糖，大火煮开</li>
+          <li><strong>⑤ 烫菜铺底：</strong>豆芽/金针菇/莴笋焯水铺碗底</li>
+          <li><strong>⑥ 烫牛肉：</strong>大火，汤开后一片片下肉，再次大开后约1min捞出</li>
+          <li><strong>⑦ 泼油：</strong>碗中撒花椒面+辣椒碎+葱花+蒜末，热油六七成热浇上</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>切肉：顶丝切1mm（或冻肉1.5mm），化冻沥干揪白筋</li>
+      <li>腌肉：盐+味精+老抽+食用碱按摩→葱姜水（一斤肉二两多）→全蛋→淀粉→封油</li>
+      <li>干辣椒攥碎炒香，花椒炒干磨面，葱姜蒜分两份</li>
+      <li>底油炸花椒捞出 → 小火炒豆瓣酱出红油 → 加葱姜蒜+辣椒碎</li>
+      <li>加水+花椒面+生抽+胡椒粉+味精+糖，大火煮开</li>
+      <li>蔬菜焯水铺碗底；牛肉片大火下锅，再次大开约1min</li>
+      <li>碗中撒香料，热油六七成热浇上，撒芝麻</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div><strong>隋卞要点：</strong>①牛肉1mm越薄越嫩；②食用碱让肉蓬松，用量极少；③葱姜水是关键，一斤肉二两多；④牛肉再次大开即可，不能煮久；⑤泼油温度六七成热激发香气不焦糊。</div>
+  </div>
+  <div class="dish-timeline">
+    ⏱ <strong>时间轴：</strong>切肉(10min) → 腌肉(10min) → 炒底料(3min) → 煮汤(2min) → 烫菜(2min) → 烫肉(2min) → 泼油(1min) | 约<strong>20min</strong> + 备料
+  </div>
+</div>
+
+<!-- D2: 油焖大虾 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🦐</span>
+    <div class="dish-meta">
+      <div class="dish-name">节节高升 · 油焖罗氏虾</div>
+      <div class="dish-sub">硬菜 · 晓飞歌小龙虾调料</div>
+    </div>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>罗氏虾</strong> — 2kg，剪须脚刺，开背去虾线</li>
+          <li><strong>晓飞歌小龙虾调料</strong> — 1袋（约300-400g）</li>
+          <li><strong>姜·蒜·葱</strong> — 各30g，切末/葱花</li>
+          <li><strong>啤酒/清水</strong> — 200ml</li>
+          <li><strong>色拉油</strong> — 适量</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>罗氏虾去虾线：嘴巴处掏进去，去胆囊，腹部剪开</li>
+          <li>开背（背部划一刀更入味），虾身擦干或沥干</li>
+          <li>虾身可裹薄淀粉抖掉余粉（也可不裹，直接炒）</li>
+          <li>晓飞歌小龙虾调料整袋备用</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 处理：</strong>罗氏虾剪须脚刺，开背去虾线，沥干表面</li>
+          <li><strong>② 炒虾：</strong>锅烧热，宽油，下罗氏虾大火翻炒至虾壳变红（约3-4min）盛出备用</li>
+          <li><strong>③ 炒料：</strong>锅留底油，下姜蒜末爆香，倒入晓飞歌小龙虾调料整袋，小火炒出红油（约1-2min）</li>
+          <li><strong>④ 焖煮：</strong>下虾，加啤酒/清水200ml，大火煮开后盖盖小火焖<strong>3-5min</strong></li>
+          <li><strong>⑤ 出锅：</strong>撒葱花，出锅</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>罗氏虾处理好，晓飞歌小龙虾调料整袋备用</li>
+      <li>宽油大火热锅，下虾大火翻炒至壳变红（约3-4min）盛出</li>
+      <li>虾盛出，锅留底油，下姜蒜末爆香</li>
+      <li>小火炒晓飞歌调料出红油（约1-2min）</li>
+      <li>下虾，加啤酒/清水200ml，焖3-5min</li>
+      <li>撒葱花出锅</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>虾壳薄，焖时火不能太大，时间控制在3-5min内。晓飞歌调料本身有味，可根据口味决定是否额外加盐。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>处理虾(5min) → 炒虾(3-4min) → 炒料(1-2min) → 焖(3-5min) | 合计约<strong>12-15min</strong></div>
+</div>
+
+<!-- D3: 桑拿鸡 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🐔</span>
+    <div class="dish-meta">
+      <div class="dish-name">大吉大利 · 桑拿鸡</div>
+      <div class="dish-sub">硬菜 · 丝瓜虫草花清蒸</div>
+    </div>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>清远鸡/三黄鸡</strong> — 1.2kg，切丝</li>
+          <li><strong>丝瓜</strong> — 3根，去皮切滚刀块</li>
+          <li><strong>干虫草花</strong> — 80g，温水泡软沥干</li>
+          <li><strong>姜·葱</strong> — 各30g，切丝/段</li>
+          <li><strong>红枣</strong> — 8颗，去核</li>
+          <li><strong>枸杞</strong> — 20g</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>鸡切丝（约5mm，太细蒸完会缩没）</li>
+          <li>丝瓜去皮，切滚刀块（切大块不然蒸完出水化掉）</li>
+          <li>虫草花泡软后轻轻攥干水分</li>
+          <li>鸡丝+姜丝+料酒+盐+生抽+蚝油+淀粉拌匀，腌15min</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 腌：</strong>鸡丝+生抽+蚝油+料酒+盐+淀粉拌匀，腌15min</li>
+          <li><strong>② 铺盘底：</strong>丝瓜块铺盘底，虫草花+红枣+枸杞铺上面</li>
+          <li><strong>③ 铺鸡丝：</strong>腌好的鸡丝均匀铺在菜上，撒姜丝</li>
+          <li><strong>④ 蒸制：</strong>水开后，中大火蒸<strong>10-12min</strong>（鸡肉变白即熟）</li>
+          <li><strong>⑤ 出锅：</strong>撒葱段，淋少许热油激发香气</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>鸡丝切好后加腌料拌匀，腌制15min</li>
+      <li>丝瓜铺盘底，虫草花/红枣/枸杞铺在上面</li>
+      <li>鸡丝铺顶层，均匀撒开</li>
+      <li>水开后上锅，中大火蒸10-12min</li>
+      <li>出锅撒葱段，淋一勺热油即可</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>鸡丝不能切太细，蒸时会收缩。丝瓜切大块。高压锅压排骨时，蒸锅同时蒸鸡。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>切鸡丝(8min) → 腌(15min) → 摆盘(5min) → 蒸(10-12min) | 合计约<strong>38-40min</strong>（与排骨并行）</div>
+</div>
+
+<!-- D4: 粉蒸排骨 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🥟</span>
+    <div class="dish-meta">
+      <div class="dish-name">蒸蒸日上 · 粉蒸排骨</div>
+      <div class="dish-sub">硬菜 · 高压锅版 · 村驴做法</div>
+    </div>
+    <span class="dish-src-tag">来源：村驴</span>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>猪小排</strong> — 2kg，剁4cm小块</li>
+          <li><strong>蒸肉粉</strong> — 500g（无盐型）</li>
+          <li><strong>郫县豆瓣</strong> — 80g，剁细</li>
+          <li><strong>老抽·生抽·料酒</strong> — 各40-60ml</li>
+          <li><strong>花椒·八角·香叶</strong> — 各适量</li>
+          <li><strong>姜·葱</strong> — 各30g</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>排骨剁4cm小块，冷水浸泡1h去血水</li>
+          <li>捞出沥干（厨房纸擦干表面）</li>
+          <li>腌30min：豆瓣+生抽+老抽+料酒+盐+鸡精+姜末拌匀</li>
+          <li>蒸肉粉撒入，少量加水让粉化开，每块排骨均匀裹粉</li>
+          裹好粉的排骨放入高压锅，加少许水（刚好没过排骨下方即可）
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 泡血水：</strong>排骨冷水浸泡1h，中途换水1-2次</li>
+          <li><strong>② 腌排骨：</strong>调料拌匀腌30min入味</li>
+          <li><strong>③ 裹粉：</strong>蒸肉粉+少量水拌匀，排骨均匀裹粉</li>
+          <li><strong>④ 高压锅压：</strong>排骨放入高压锅，加少许水，上汽后中火压<strong>30-35min</strong></li>
+          <li><strong>⑤ 出锅：</strong>散气后开盖，撒葱花，趁热上桌</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>排骨提前冷水泡1h去血水，沥干</li>
+      <li>腌料拌匀腌30min</li>
+      <li>蒸肉粉加少许水化开，排骨裹粉</li>
+      <li><strong>第一个上蒸锅！</strong>大火蒸开，中火蒸60min</li>
+      <li>出锅撒葱花，趁热上桌</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>高压锅压30-35min，比蒸锅60min更快更入味。压好后不要急开阀，散气后再开。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>泡血水(1h) → 腌(30min) → 裹粉摆盘(8min) → <strong>蒸(60min，最先上锅)</strong> | 建议10:00开始备，11:45前上桌</div>
+</div>
+
+<!-- D5: 奥尔良鸡翅煲 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🍗</span>
+    <div class="dish-meta">
+      <div class="dish-name">阖家欢乐 · 奥尔良鸡翅煲</div>
+      <div class="dish-sub">配菜 · 娃厂长原声提取</div>
+    </div>
+    <span class="dish-src-tag">娃厂长 · 抖音原声</span>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>鸡翅中</strong> — 25个（约1.5kg），两面划花刀</li>
+          <li><strong>奥尔良腌料</strong> — 80g（约33g/斤）</li>
+          <li><strong>黑鸭煲酱料</strong> — 120g（约50g/斤）</li>
+          <li><strong>啤酒</strong> — 250ml（约100ml/斤）</li>
+          <li><strong>色拉油</strong> — 120ml</li>
+          <li><strong>姜片·花椒·蒜粒·干辣椒节·白芝麻</strong> — 各适量</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>鸡翅两面斜划2刀，方便入味</li>
+          <li>清水浸泡15min去血水，沥干</li>
+          <li>腌汁：奥尔良腌料+黑鸭煲酱+啤酒+色拉油+姜片+花椒+蒜粒+干辣椒节+芝麻调匀</li>
+          <li>鸡翅倒入腌汁拌匀，腌<strong>10min以上</strong></li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 砂锅微温：</strong>砂锅烧热至约50°C（手摸微温）</li>
+          <li><strong>② 入翅：</strong>倒入腌好的鸡翅，小火煎两面金黄（约5min）</li>
+          <li><strong>③ 焖煮：</strong>盖盖小火焖3-5min</li>
+          <li><strong>④ 收汁：</strong>开大火，勾薄芡，收汁至浓稠</li>
+          <li><strong>⑤ 出锅：</strong>撒白芝麻，装盘</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>鸡翅划刀，清水浸泡去血水，沥干</li>
+      <li>按比例调腌汁（每斤鸡翅：奥尔良腌料33g+黑鸭煲酱50g+啤酒100ml+油50ml+姜片5g+花椒2g+蒜粒5g+辣椒节15g+芝麻2g）</li>
+      <li>砂锅<strong>微温</strong>入料（不能烧热，会焦底），下鸡翅小火煎</li>
+      <li>小火焖3-5min，开大火勾芡收汁</li>
+      <li>撒芝麻出锅</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>砂锅必须微温入料，不能烧热再放鸡翅。焖时注意火候防止糊锅。<strong>建议最后做，上桌前15min开始。</strong></div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>处理翅(5min) → 腌翅(10min) → 煎(5min) → 焖(3-5min) → 收汁(2min) | 合计约<strong>25-27min</strong>（最后做）</div>
+</div>
+
+<!-- D6: 娃娃菜炒火腿肠 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🥬</span>
+    <div class="dish-meta">
+      <div class="dish-name">和和美美 · 娃娃菜炒火腿肠</div>
+      <div class="dish-sub">配菜 · 家常做法</div>
+    </div>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>娃娃菜</strong> — 8颗（约2.5kg），切大块或条</li>
+          <li><strong>火腿肠</strong> — 15根（约750g），切斜片</li>
+          <li><strong>大蒜·姜·小红椒</strong> — 各适量</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>娃娃菜洗净，竖切两半，再切大块</li>
+          <li>火腿肠斜切成片（约5mm厚）</li>
+          <li>蒜末+姜末+辣椒圈备好</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 热锅凉油：</strong>大火，油温七成热</li>
+          <li><strong>② 爆香：</strong>下蒜末+姜末+辣椒，爆香（约15s）</li>
+          <li><strong>③ 炒火腿：</strong>下火腿肠，中火翻炒至表面微焦（约2min）</li>
+          <li><strong>④ 炒娃娃菜：</strong>大火，下娃娃菜快炒，菜叶一软塌即刻（约2min）</li>
+          <li><strong>⑤ 调味：</strong>加蚝油+生抽+白糖+盐，翻匀出锅</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>娃娃菜切大块，火腿肠斜切</li>
+      <li>油热后下蒜姜末+辣椒，爆香</li>
+      <li>下火腿肠煎至表面微黄</li>
+      <li>大火下娃娃菜，全程大火快炒不超过40s</li>
+      <li>调味后出锅，不能盖盖，保持翠绿</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>全程大火快炒，娃娃菜炒太久会出水变黄。简单菜，适合与其他大菜并行操作。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>切配(3min) → 爆香(15s) → 煎肠(2min) → 炒菜(2min) | 合计约<strong>7min</strong>，全程大火</div>
+</div>
+
+<!-- D7: 厚切炸猪排 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🥇</span>
+    <div class="dish-meta">
+      <div class="dish-name">金玉满堂 · 厚切炸猪排</div>
+      <div class="dish-sub">配菜 · 空气炸锅版 · 山姆半成品</div>
+    </div>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>山姆厚切猪排</strong> — 6片（约1kg）</li>
+          <li><strong>卷心菜</strong> — 半颗，细切丝，铺底</li>
+          <li><strong>鸡蛋</strong> — 3个，打散</li>
+          <li><strong>面粉·面包糠</strong> — 各适量</li>
+          <li><strong>猪排酱/美乃滋</strong> — 蘸酱用</li>
+          <li><strong>空气炸锅</strong> — 1台，铺烘焙纸</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>卷心菜切细丝，铺盘底备用</li>
+          <li>猪排从冰箱取出，恢复室温约10min</li>
+          <li>准备三盆：面粉、蛋液、面包糠</li>
+          <li>猪排两面依次沾面粉→蛋液→面包糠，轻轻按压</li>
+          <li>空气炸锅铺烘焙纸，180°C预热5min</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 裹粉：</strong>面粉→蛋液→面包糠依次裹好，静置5min让面包糠贴合</li>
+          <li><strong>② 空气炸锅：</strong>180°C，猪排平铺不叠，炸<strong>10-12min</strong>（中途拉出翻面一次）</li>
+          <li><strong>③ 出锅：</strong>炸至金黄酥脆，吸油纸吸干，摆在卷心菜丝上，配猪排酱</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>卷心菜切细丝铺盘底</li>
+      <li>猪排室温回软，依次裹面粉→蛋液→面包糠，静置5min</li>
+      <li>空气炸锅180°C预热5min，猪排平铺铺烘焙纸</li>
+      <li>180°C炸10-12min，中途翻面一次</li>
+      <li>炸至金黄，吸油纸吸干，配猪排酱上桌</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div>猪排和炸鸡可共用空气炸锅，分批炸。猪排先炸（无面包糠渣），再炸鸡（裹粉掉渣）。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>切菜丝(5min) → 裹粉静置(5min) → 初炸(2min) → 复炸(30s) → 控油(1min) | 合计约<strong>14min</strong></div>
+</div>
+
+<!-- D8: 派对炸鸡组合 -->
+<div class="dish-card">
+  <div class="dish-card-header ziqin">
+    <span class="dish-emoji">🎉</span>
+    <div class="dish-meta">
+      <div class="dish-name">喜庆团圆 · 派对炸鸡组合</div>
+      <div class="dish-sub">配菜 · 山姆半成品</div>
+    </div>
+  </div>
+  <div class="dish-body">
+    <div class="col-border">
+      <div class="col-header">🥬 备料（20人估）</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>山姆美式脆皮炸鸡</strong> — 6块（约1.2kg）</li>
+          <li><strong>山姆欧式炸鸡</strong> — 5块（约1kg）</li>
+          <li><strong>山姆辣味炸鸡</strong> — 5块（约1kg）</li>
+          <li><strong>油</strong> — 足量，炸制用</li>
+          <li><strong>吸油纸·番茄酱·蜂蜜芥末·甜辣酱</strong> — 各适量</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-border">
+      <div class="col-header">🔪 切配</div>
+      <div class="col-content">
+        <ul>
+          <li>炸鸡从冰箱取出，恢复室温约10min</li>
+          <li>烤盘铺吸油纸备用</li>
+          <li>大托盘装盘，配三种蘸酱分格放</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="col-header">👨‍🍳 烹饪</div>
+      <div class="col-content">
+        <ul>
+          <li><strong>① 热油：</strong>油温烧至七成热</li>
+          <li><strong>② 初炸：</strong>分批下炸鸡，中火炸5-6min至金黄</li>
+          <li><strong>③ 控油：</strong>捞出放吸油纸上沥油1min</li>
+          <li><strong>④ 摆盘：</strong>大托盘摆盘，三种酱分格跟上</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="dish-steps">
+    <ol>
+      <li>炸鸡室温回软，油温烧至七成热</li>
+      <li>分批下锅，中火炸5-6min至表面金黄酥脆</li>
+      <li>捞出放吸油纸上沥油</li>
+      <li>大托盘摆盘，配三种蘸酱</li>
+    </ol>
+  </div>
+  <div class="dish-note warning">
+    <span class="note-icon">⚠️</span>
+    <div><strong>炸物顺序：</strong>先炸猪排（油干净）→ 再炸鸡（裹粉会掉渣）。炸完猪排后油温重新烧热再炸鸡。</div>
+  </div>
+  <div class="dish-timeline">⏱ <strong>时间轴：</strong>回软(10min) → 初炸(5-6min/批) → 控油(1min) | 合计约<strong>20min</strong>（可与猪排共用一锅油）</div>
+</div>
+
+
+<!-- ═══════════════════════════════════ FOOTER ══ -->
+<div class="footer">
+  <div class="footer-sep">
+    <span class="line"></span>
+    <span class="text">·</span>
+    <span class="line"></span>
+  </div>
+  <p>
+    特厨隋卞 · 隋坡 · 村驴 · 娃厂长 抖音原声整理<br>
+    阿策 出品 · 2026年5月13日
+  </p>
+  <p style="margin-top:8px;font-size:11px;color:var(--muted);">
+    自勤菜品已完善 · 共8道菜
+  </p>
+</div>
+
+</div><!-- /.container -->
+</body>
+</html>
