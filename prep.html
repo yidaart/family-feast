@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>备料清单 · 5月16日</title>
+<style>
+:root {
+  --canvas: #faf9f5; --ink: #141413; --body: #3d3d3a; --muted: #8a8a87;
+  --primary: #cc785c; --surface-card: #efe9de; --hairline: #e0d9cf;
+  --shadow: rgba(20,20,18,0.06); --surface-soft: #f5f0e8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC",sans-serif;background:var(--canvas);color:var(--body);padding:32px 16px 64px;line-height:1.6}
+.container{max-width:700px;margin:0 auto}
+h1{font-family:Georgia,serif;font-size:clamp(32px,5vw,44px);color:var(--ink);letter-spacing:-1px}
+h2{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin:28px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--hairline)}
+.sub{color:var(--muted);font-size:14px;margin-bottom:24px}
+.nav{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+.nav a{color:var(--primary);text-decoration:none;font-size:13px;font-weight:500;padding:6px 14px;border:1px solid var(--hairline);border-radius:9999px}
+.nav a:hover{background:var(--surface-card)}
+.cat{display:grid;gap:6px;margin-bottom:8px}
+.item{display:flex;align-items:flex-start;gap:10px;padding:8px 12px;background:var(--surface-card);border:1px solid var(--hairline);border-radius:8px;cursor:pointer;transition:background .15s}
+.item:hover{background:var(--surface-soft)}
+.item.checked .label{text-decoration:line-through;color:var(--muted)}
+.item.checked{opacity:0.5}
+.cb{width:18px;height:18px;border:2px solid var(--hairline);border-radius:4px;flex-shrink:0;margin-top:1px;display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--primary)}
+.item.checked .cb{background:var(--primary);border-color:var(--primary);color:#fff}
+.label{flex:1;font-size:13.5px;line-height:1.5}
+.label strong{color:var(--ink);font-weight:500}
+.amount{font-size:11px;color:var(--muted);flex-shrink:0;margin-top:1px}
+.progress{text-align:right;font-size:12px;color:var(--muted);margin-bottom:6px}
+.reset-btn{font-size:12px;color:var(--muted);cursor:pointer;background:none;border:1px solid var(--hairline);border-radius:9999px;padding:4px 12px;margin-bottom:16px}
+.reset-btn:hover{background:var(--surface-card)}
+@media(max-width:600px){body{padding:16px 8px 48px}.item{padding:6px 10px}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="nav">
+  <a href="index.html">← 菜品信息卡</a>
+  <a href="timeline.html">时间轴</a>
+  <a href="https://github.com/yidaart/family-feast">GitHub</a>
+</div>
+
+<h1>备料清单</h1>
+<div class="sub">8道菜 · 20人份 · 按品类分组 · 点击打勾划线</div>
+<button class="reset-btn" onclick="resetAll()">重置全部</button>
+<div class="progress" id="progress">已备 0 / <span id="total">0</span></div>
+
+<h2>猪肉</h2><div class="cat" id="cat-pork"></div>
+<h2>牛肉</h2><div class="cat" id="cat-beef"></div>
+<h2>鸡肉</h2><div class="cat" id="cat-chicken"></div>
+<h2>海鲜</h2><div class="cat" id="cat-seafood"></div>
+<h2>蔬菜</h2><div class="cat" id="cat-veg"></div>
+<h2>豆制品·干货</h2><div class="cat" id="cat-dry"></div>
+<h2>调料·香料</h2><div class="cat" id="cat-spice"></div>
+<h2>半成品·熟食</h2><div class="cat" id="cat-semi"></div>
+<h2>蘸酱·饮品</h2><div class="cat" id="cat-sauce"></div>
+<h2>工具确认</h2><div class="cat" id="cat-tools"></div>
+
+<div class="nav" style="margin-top:32px">
+  <a href="index.html">← 菜品信息卡</a>
+  <a href="timeline.html">时间轴</a>
+</div>
+</div>
+
+<script>
+const items = [
+  // 猪肉
+  {cat:"cat-pork",label:"猪小排 — <strong>粉蒸排骨</strong>",amount:"2kg · 剁4cm小块"},
+  {cat:"cat-pork",label:"猪排(山姆厚切) — <strong>炸猪排</strong>",amount:"6片 · 约1kg"},
+  // 牛肉
+  {cat:"cat-beef",label:"牛外脊 — <strong>水煮豆花牛肉</strong>",amount:"2kg · 顶丝切1mm薄片"},
+  // 鸡肉
+  {cat:"cat-chicken",label:"清远鸡/三黄鸡 — <strong>桑拿鸡</strong>",amount:"1.2kg · 切丝5mm"},
+  {cat:"cat-chicken",label:"鸡翅中 — <strong>奥尔良鸡翅煲</strong>",amount:"25个 · 约1.5kg"},
+  // 海鲜
+  {cat:"cat-seafood",label:"罗氏虾 — <strong>油焖虾</strong>",amount:"2kg · 去线开背"},
+  // 蔬菜
+  {cat:"cat-veg",label:"豆花(嫩豆腐) — <strong>水煮牛肉</strong>",amount:"8小块 · 约1.5kg"},
+  {cat:"cat-veg",label:"莴笋 — <strong>水煮牛肉(配菜)</strong>",amount:"2根 · 切薄片"},
+  {cat:"cat-veg",label:"豆芽 — <strong>水煮牛肉(铺底)</strong>",amount:"500g"},
+  {cat:"cat-veg",label:"金针菇 — <strong>水煮牛肉(配菜)</strong>",amount:"300g"},
+  {cat:"cat-veg",label:"芹菜 — <strong>水煮牛肉</strong>",amount:"150g · 切段"},
+  {cat:"cat-veg",label:"丝瓜 — <strong>桑拿鸡(铺底)</strong>",amount:"3根 · 去皮滚刀块"},
+  {cat:"cat-veg",label:"娃娃菜 — <strong>娃娃菜炒火腿肠</strong>",amount:"8颗 · 约2.5kg"},
+  {cat:"cat-veg",label:"卷心菜 — <strong>炸猪排(铺底)</strong>",amount:"半颗 · 细切丝"},
+  // 豆制品·干货
+  {cat:"cat-dry",label:"干虫草花 — <strong>桑拿鸡</strong>",amount:"80g · 温水泡软"},
+  {cat:"cat-dry",label:"红枣 — <strong>桑拿鸡</strong>",amount:"8颗 · 去核"},
+  {cat:"cat-dry",label:"枸杞 — <strong>桑拿鸡</strong>",amount:"20g"},
+  {cat:"cat-dry",label:"蒸肉粉(无盐型) — <strong>粉蒸排骨</strong>",amount:"500g"},
+  // 调料
+  {cat:"cat-spice",label:"干辣椒 — <strong>水煮牛肉</strong>",amount:"80g · 攥碎炒香"},
+  {cat:"cat-spice",label:"花椒 — <strong>水煮牛肉</strong>",amount:"60g · 炒干磨面"},
+  {cat:"cat-spice",label:"郫县豆瓣 — <strong>粉蒸排骨+水煮牛肉</strong>",amount:"约120g"},
+  {cat:"cat-spice",label:"小葱 — <strong>多道菜用</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"大蒜 — <strong>多道菜用</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"姜 — <strong>多道菜用(含葱姜水)</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"白芝麻 — <strong>水煮牛肉+鸡翅煲</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"花椒·八角·香叶 — <strong>粉蒸排骨</strong>",amount:"各适量"},
+  {cat:"cat-spice",label:"奥尔良腌料 — <strong>鸡翅煲</strong>",amount:"80g"},
+  {cat:"cat-spice",label:"黑鸭煲酱料 — <strong>鸡翅煲</strong>",amount:"120g"},
+  {cat:"cat-spice",label:"晓飞歌小龙虾调料 — <strong>油焖虾</strong>",amount:"1袋 · 约300-400g"},
+  {cat:"cat-spice",label:"老抽 — <strong>腌肉·蒸排骨</strong>",amount:"80ml"},
+  {cat:"cat-spice",label:"生抽 — <strong>多道菜</strong>",amount:"100ml"},
+  {cat:"cat-spice",label:"料酒 — <strong>多道菜</strong>",amount:"60ml"},
+  {cat:"cat-spice",label:"蚝油 — <strong>娃娃菜·桑拿鸡</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"盐·味精·糖·胡椒粉",amount:"各适量"},
+  {cat:"cat-spice",label:"食用碱 — <strong>腌牛肉(极少)</strong>",amount:"极少许"},
+  {cat:"cat-spice",label:"鸡蛋 — <strong>腌牛肉+炸猪排</strong>",amount:"3-4个"},
+  {cat:"cat-spice",label:"淀粉 — <strong>腌牛肉·勾芡</strong>",amount:"适量"},
+  {cat:"cat-spice",label:"面粉·面包糠 — <strong>炸猪排</strong>",amount:"各适量"},
+  {cat:"cat-spice",label:"色拉油 — <strong>多道菜用</strong>",amount:"足量"},
+  // 半成品
+  {cat:"cat-semi",label:"火腿肠 — <strong>娃娃菜炒火腿肠</strong>",amount:"15根 · 约750g"},
+  {cat:"cat-semi",label:"山姆美式脆皮炸鸡",amount:"6块 · 约1.2kg"},
+  {cat:"cat-semi",label:"山姆欧式炸鸡",amount:"5块 · 约1kg"},
+  {cat:"cat-semi",label:"山姆辣味炸鸡",amount:"5块 · 约1kg"},
+  {cat:"cat-semi",label:"啤酒 — <strong>油焖虾+鸡翅煲</strong>",amount:"450ml"},
+  // 蘸酱
+  {cat:"cat-sauce",label:"番茄酱",amount:"—"},
+  {cat:"cat-sauce",label:"蜂蜜芥末酱",amount:"—"},
+  {cat:"cat-sauce",label:"甜辣酱",amount:"—"},
+  {cat:"cat-sauce",label:"猪排酱/美乃滋",amount:"—"},
+  // 工具
+  {cat:"cat-tools",label:"高压锅 ✅",amount:"粉蒸排骨"},
+  {cat:"cat-tools",label:"蒸锅 ✅",amount:"桑拿鸡"},
+  {cat:"cat-tools",label:"炒锅(大) ✅",amount:"水煮牛肉/油焖虾/炸鸡/娃娃菜"},
+  {cat:"cat-tools",label:"砂锅 ✅",amount:"鸡翅煲"},
+  {cat:"cat-tools",label:"空气炸锅 ✅",amount:"炸猪排"},
+  {cat:"cat-tools",label:"吸油纸",amount:"炸物控油"},
+  {cat:"cat-tools",label:"大托盘 ×2",amount:"摆盘用"},
+];
+
+function render(){
+  document.querySelectorAll(".cat").forEach(c=>c.innerHTML="");
+  items.forEach((it,i)=>{
+    const saved = localStorage.getItem("prep_"+i);
+    const checked = saved === "true";
+    const div = document.createElement("div");
+    div.className = "item" + (checked?" checked":"");
+    div.onclick = ()=>{
+      const cur = localStorage.getItem("prep_"+i) === "true";
+      localStorage.setItem("prep_"+i, cur?"false":"true");
+      render();
+    };
+    div.innerHTML = `<span class="cb">${checked?"✓":""}</span><span class="label">${it.label}</span><span class="amount">${it.amount}</span>`;
+    document.getElementById(it.cat).appendChild(div);
+  });
+  const total = items.length;
+  const done = items.filter((_,i)=>localStorage.getItem("prep_"+i)==="true").length;
+  document.getElementById("total").textContent = total;
+  document.getElementById("progress").innerHTML = `已备 ${done} / ${total}`;
+}
+function resetAll(){
+  items.forEach((_,i)=>localStorage.removeItem("prep_"+i));
+  render();
+}
+render();
+</script>
+</body>
+</html>
