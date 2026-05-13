@@ -32,6 +32,7 @@ h2{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin:28px 0 10px;
 .progress{text-align:right;font-size:12px;color:var(--muted);margin-bottom:6px}
 .reset-btn{font-size:12px;color:var(--muted);cursor:pointer;background:none;border:1px solid var(--hairline);border-radius:9999px;padding:4px 12px;margin-bottom:16px}
 .reset-btn:hover{background:var(--surface-card)}
+.warn{background:#fef3e8;border:1px solid #f0d8c8;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#8a4a2a}
 @media(max-width:600px){body{padding:16px 8px 48px}.item{padding:6px 10px}}
 </style>
 </head>
@@ -47,6 +48,8 @@ h2{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin:28px 0 10px;
 <div class="sub">8道菜 · 20人份 · 按品类分组 · 点击打勾划线</div>
 <button class="reset-btn" onclick="resetAll()">重置全部</button>
 <div class="progress" id="progress">已备 0 / <span id="total">0</span></div>
+
+<div class="warn"><strong>分量提醒：</strong>鸡翅1.2kg≈20个，刚好每人1个；猪排1kg≈6-8片，每人约1小块，偏紧；炸鸡2.4kg够20人。如果人数超20，建议加购。</div>
 
 <h2>猪肉</h2><div class="cat" id="cat-pork"></div>
 <h2>牛肉</h2><div class="cat" id="cat-beef"></div>
@@ -67,17 +70,12 @@ h2{font-family:Georgia,serif;font-size:18px;color:var(--ink);margin:28px 0 10px;
 
 <script>
 const items = [
-  // 猪肉
   {cat:"cat-pork",label:"猪小排 — <strong>粉蒸排骨</strong>",amount:"2kg · 剁4cm小块"},
-  {cat:"cat-pork",label:"猪排(山姆厚切) — <strong>炸猪排</strong>",amount:"6片 · 约1kg"},
-  // 牛肉
+  {cat:"cat-pork",label:"山姆厚切炸猪排 — <strong>炸猪排</strong>",amount:"1kg · 约6-8片 · 已调味裹粉"},
   {cat:"cat-beef",label:"牛外脊 — <strong>水煮豆花牛肉</strong>",amount:"2kg · 顶丝切1mm薄片"},
-  // 鸡肉
   {cat:"cat-chicken",label:"清远鸡/三黄鸡 — <strong>桑拿鸡</strong>",amount:"1.2kg · 切丝5mm"},
-  {cat:"cat-chicken",label:"鸡翅中 — <strong>奥尔良鸡翅煲</strong>",amount:"25个 · 约1.5kg"},
-  // 海鲜
+  {cat:"cat-chicken",label:"山姆新奥尔良风味鸡翅中 — <strong>鸡翅煲</strong>",amount:"1.2kg · 已腌制 · 约20个"},
   {cat:"cat-seafood",label:"罗氏虾 — <strong>油焖虾</strong>",amount:"2kg · 去线开背"},
-  // 蔬菜
   {cat:"cat-veg",label:"豆花(嫩豆腐) — <strong>水煮牛肉</strong>",amount:"8小块 · 约1.5kg"},
   {cat:"cat-veg",label:"莴笋 — <strong>水煮牛肉(配菜)</strong>",amount:"2根 · 切薄片"},
   {cat:"cat-veg",label:"豆芽 — <strong>水煮牛肉(铺底)</strong>",amount:"500g"},
@@ -86,12 +84,10 @@ const items = [
   {cat:"cat-veg",label:"丝瓜 — <strong>桑拿鸡(铺底)</strong>",amount:"3根 · 去皮滚刀块"},
   {cat:"cat-veg",label:"娃娃菜 — <strong>娃娃菜炒火腿肠</strong>",amount:"8颗 · 约2.5kg"},
   {cat:"cat-veg",label:"卷心菜 — <strong>炸猪排(铺底)</strong>",amount:"半颗 · 细切丝"},
-  // 豆制品·干货
   {cat:"cat-dry",label:"干虫草花 — <strong>桑拿鸡</strong>",amount:"80g · 温水泡软"},
   {cat:"cat-dry",label:"红枣 — <strong>桑拿鸡</strong>",amount:"8颗 · 去核"},
   {cat:"cat-dry",label:"枸杞 — <strong>桑拿鸡</strong>",amount:"20g"},
   {cat:"cat-dry",label:"蒸肉粉(无盐型) — <strong>粉蒸排骨</strong>",amount:"500g"},
-  // 调料
   {cat:"cat-spice",label:"干辣椒 — <strong>水煮牛肉</strong>",amount:"80g · 攥碎炒香"},
   {cat:"cat-spice",label:"花椒 — <strong>水煮牛肉</strong>",amount:"60g · 炒干磨面"},
   {cat:"cat-spice",label:"郫县豆瓣 — <strong>粉蒸排骨+水煮牛肉</strong>",amount:"约120g"},
@@ -100,8 +96,6 @@ const items = [
   {cat:"cat-spice",label:"姜 — <strong>多道菜用(含葱姜水)</strong>",amount:"适量"},
   {cat:"cat-spice",label:"白芝麻 — <strong>水煮牛肉+鸡翅煲</strong>",amount:"适量"},
   {cat:"cat-spice",label:"花椒·八角·香叶 — <strong>粉蒸排骨</strong>",amount:"各适量"},
-  {cat:"cat-spice",label:"奥尔良腌料 — <strong>鸡翅煲</strong>",amount:"80g"},
-  {cat:"cat-spice",label:"黑鸭煲酱料 — <strong>鸡翅煲</strong>",amount:"120g"},
   {cat:"cat-spice",label:"晓飞歌小龙虾调料 — <strong>油焖虾</strong>",amount:"1袋 · 约300-400g"},
   {cat:"cat-spice",label:"老抽 — <strong>腌肉·蒸排骨</strong>",amount:"80ml"},
   {cat:"cat-spice",label:"生抽 — <strong>多道菜</strong>",amount:"100ml"},
@@ -109,24 +103,18 @@ const items = [
   {cat:"cat-spice",label:"蚝油 — <strong>娃娃菜·桑拿鸡</strong>",amount:"适量"},
   {cat:"cat-spice",label:"盐·味精·糖·胡椒粉",amount:"各适量"},
   {cat:"cat-spice",label:"食用碱 — <strong>腌牛肉(极少)</strong>",amount:"极少许"},
-  {cat:"cat-spice",label:"鸡蛋 — <strong>腌牛肉+炸猪排</strong>",amount:"3-4个"},
+  {cat:"cat-spice",label:"鸡蛋 — <strong>腌牛肉</strong>",amount:"1个"},
   {cat:"cat-spice",label:"淀粉 — <strong>腌牛肉·勾芡</strong>",amount:"适量"},
-  {cat:"cat-spice",label:"面粉·面包糠 — <strong>炸猪排</strong>",amount:"各适量"},
   {cat:"cat-spice",label:"色拉油 — <strong>多道菜用</strong>",amount:"足量"},
-  // 半成品
   {cat:"cat-semi",label:"火腿肠 — <strong>娃娃菜炒火腿肠</strong>",amount:"15根 · 约750g"},
-  {cat:"cat-semi",label:"山姆美式脆皮炸鸡",amount:"6块 · 约1.2kg"},
-  {cat:"cat-semi",label:"山姆欧式炸鸡",amount:"5块 · 约1kg"},
-  {cat:"cat-semi",label:"山姆辣味炸鸡",amount:"5块 · 约1kg"},
-  {cat:"cat-semi",label:"啤酒 — <strong>油焖虾+鸡翅煲</strong>",amount:"450ml"},
-  // 蘸酱
+  {cat:"cat-semi",label:"山姆泰森派对炸鸡组合 — <strong>炸鸡</strong>",amount:"2.4kg (1.2kg×2) · 半成品"},
+  {cat:"cat-semi",label:"啤酒 — <strong>油焖虾+鸡翅煲</strong>",amount:"350ml"},
   {cat:"cat-sauce",label:"番茄酱",amount:"—"},
   {cat:"cat-sauce",label:"蜂蜜芥末酱",amount:"—"},
   {cat:"cat-sauce",label:"甜辣酱",amount:"—"},
   {cat:"cat-sauce",label:"猪排酱/美乃滋",amount:"—"},
-  // 工具
-  {cat:"cat-tools",label:"高压锅 ✅",amount:"粉蒸排骨"},
-  {cat:"cat-tools",label:"蒸锅 ✅",amount:"桑拿鸡"},
+  {cat:"cat-tools",label:"高压锅 ✅",amount:"粉蒸排骨 25-30min"},
+  {cat:"cat-tools",label:"蒸锅 ✅",amount:"桑拿鸡 12min"},
   {cat:"cat-tools",label:"炒锅(大) ✅",amount:"水煮牛肉/油焖虾/炸鸡/娃娃菜"},
   {cat:"cat-tools",label:"砂锅 ✅",amount:"鸡翅煲"},
   {cat:"cat-tools",label:"空气炸锅 ✅",amount:"炸猪排"},
