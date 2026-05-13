@@ -12,6 +12,11 @@
 .qnav a:hover,.qnav a:focus{background:var(--primary);color:#fff;border-color:var(--primary)}
 .qnav .sep{color:var(--muted);font-size:10px}
 .qnav .label{font-size:11px;color:var(--muted);letter-spacing:0.06em;padding:5px 2px}
+@media(max-width:768px){
+  .qnav{overflow-x:auto;flex-wrap:nowrap;gap:4px;-webkit-overflow-scrolling:touch;padding:8px 0}
+  .qnav a{font-size:11px;padding:5px 8px;flex-shrink:0}
+  .qnav .label,.qnav .sep{display:none}
+}
 
 /* Header */
 .header{background:var(--ink);color:#fff;border-radius:16px;padding:40px 48px;margin-bottom:20px;position:relative;overflow:hidden}

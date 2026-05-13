@@ -39,15 +39,51 @@ h1,h2,h3{font-family:Georgia,"PingFang SC",serif;color:var(--ink);line-height:1.
 
 /* Responsive */
 @media(max-width:768px){
+  body{padding:12px 8px 64px}
+  .container{max-width:100%}
   .summary-strip{grid-template-columns:repeat(2,1fr)}
+  .summary-item{padding:14px 16px}
+  .summary-item .num{font-size:22px}
   .dbody{grid-template-columns:1fr}
   .dcol-b{border-right:none;border-bottom:1px solid var(--hairline)}
-  .dsteps ol{grid-template-columns:1fr}
-  .header{padding:28px 24px}
+  .dcol-h{font-size:11px;padding:8px 14px}
+  .dcol-c{padding:10px 14px}
+  .dcol-c li{font-size:13px;line-height:1.65}
+  .dsteps{padding:10px 14px}
+  .dsteps ol{grid-template-columns:1fr;padding-left:16px}
+  .dsteps li{font-size:13px;line-height:1.6}
+  .dnote{padding:8px 14px;font-size:12px}
+  .dtime{padding:8px 14px;font-size:12px}
+  .header{padding:24px 20px;border-radius:12px}
+  .header h1{font-size:clamp(26px,6vw,36px)}
+  .header-eyebrow{font-size:11px}
+  .header-sub{font-size:13px}
+  .header-badge{font-size:12px}
+  .back-top{width:36px;height:36px;bottom:16px;right:12px;font-size:16px}
+  .dcard{border-radius:12px;margin-bottom:12px;scroll-margin-top:50px}
+  .dch{padding:10px 14px;gap:8px}
+  .dch-name{font-size:15px}
+  .dch-sub{font-size:11px}
+  .dch-tag{font-size:10px;padding:2px 6px}
+  .pbanner{padding:10px 14px;font-size:13px}
+  .sdiv{margin:20px 0 12px}
+  .sdiv .tag{font-size:13px;padding:5px 14px}
+  .footer{padding:24px 16px;font-size:13px}
+  .nav{overflow-x:auto;flex-wrap:nowrap;gap:6px}
+  .nav a{font-size:12px;padding:5px 10px;flex-shrink:0}
+  .plinks a{font-size:12px;padding:5px 12px}
 }
-@media(max-width:600px){
-  body{padding:16px 8px 48px}
-  .card{padding:14px 16px}
+@media(max-width:480px){
+  body{padding:8px 4px 56px}
+  .header{padding:16px 12px}
+  .header h1{font-size:22px}
+  .dch{padding:8px 10px}
+  .dch-name{font-size:14px}
+  .dch-emoji{font-size:18px}
+  .dcol-c li{font-size:12.5px}
+  .dsteps li{font-size:12px}
+  .card{padding:12px 14px}
+  .dcard{border-radius:10px}
 }
 
 /* === Print === */
